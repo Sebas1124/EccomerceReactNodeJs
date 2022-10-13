@@ -7,6 +7,7 @@ import { ProfilePage } from './../pages/ProfilePage';
 import { PrivateRoute } from './PrivateRoute';
 import { useCartShopping } from '../hooks/useCartShopping';
 import { SocketContext } from '../context/SocketContext';
+import { PreloaderComponent } from '../components/Preloader/PreloaderComponent';
 
 
 export const AppRouter = () => {
@@ -24,9 +25,10 @@ export const AppRouter = () => {
       getCartsShopping();
     });
   }, [ socket ])
+
   
   if ( auth.checking ) {
-    return <h1>Espere por favor!</h1>
+    return <PreloaderComponent/>
   }
 
   return (
