@@ -19,14 +19,14 @@ export const AppRouter = () => {
   useEffect(() => {
     verificarToken();
   }, [ verificarToken ])
-
+  
   useEffect(() => {
     socket?.on('lista-carrito', ( product ) => {
       getCartsShopping();
     });
   }, [ socket ])
 
-  
+
   if ( auth.checking ) {
     return <PreloaderComponent/>
   }
