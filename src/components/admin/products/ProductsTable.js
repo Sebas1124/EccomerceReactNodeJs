@@ -32,11 +32,19 @@ const makeStyle=( status )=>{
 
 
 export const ProductsTable = ({ products }) => {
-  const [ modal, setModal ] = useState(false);
 
-  const openModal = () => {
+  const [ modal, setModal ] = useState(false);
+  const [ currentTask, setCurrentTask ] = useState();
+
+  const handleUpdateTask = ( ev, product ) => {
+    ev.preventDefault();
+    setCurrentTask(product)
     setModal(true)
   }
+  const closeModal = () => {
+    setModal(false)
+  }
+  
   const deleteProduct = async( ev, id ) => {
     await fectSinToken('productos/delete', {"_id": id}, "DELETE");
     window.location.reload(true);
@@ -63,29 +71,30 @@ export const ProductsTable = ({ products }) => {
             </TableHead>
             <TableBody style={{ color: "white", overflowY: 'scroll' }} >
               {
-                products.map( ( product ) => (
+                (modal)
+                  ? <ModalComponent isOpen={ modal } product={ currentTask } closeModal={ closeModal }/>
+                  :products.map( ( product ) => (
 
-                      <TableRow key={ product._id }
-                          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                          >
-                          <TableCell component="th" scope="product">
-                              { product._id }
+                    <TableRow key={ product._id }
+                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="product">
+                            { product._id }
+                        </TableCell>
+                          <TableCell align="left"><img width={ 20 } src={ (product.image) ? require(`../../../assets/img/${product.image}`) : null } alt="Picture"/></TableCell>
+                          <TableCell align="left">{ product.Nombre }</TableCell>
+                          <TableCell align="left">{ product.Precio }</TableCell>
+                          <TableCell align="left">{ product.stock }</TableCell>
+                          <TableCell align="left">
+                          <span className="status" style={ makeStyle( product.SoldOut ) }>{ ( product.SoldOut ) ? 'Sold Out' : `Stock: ${ product.stock }` }</span>
                           </TableCell>
-                            <TableCell align="left"><img width={ 20 } src={ (product.image) ? require(`../../../assets/img/${product.image}`) : null } alt="Picture"/></TableCell>
-                            <TableCell align="left">{ product.Nombre }</TableCell>
-                            <TableCell align="left">{ product.Precio }</TableCell>
-                            <TableCell align="left">{ product.stock }</TableCell>
-                            <TableCell align="left">
-                            <span className="status" style={ makeStyle( product.SoldOut ) }>{ ( product.SoldOut ) ? 'Sold Out' : `Stock: ${ product.stock }` }</span>
-                            </TableCell>
-                            <TableCell align="left">
-                              <button style={{ marginRight: 10, background: '#30D5B7', padding: '1rem 1rem 1rem', borderRadius: 50 }} onClick={ openModal }>Edit</button>
-                              <button style={{ marginRight: 10, background: '#C8266D', padding: '1rem 1rem 1rem', borderRadius: 50}} onClick={ (ev) => deleteProduct( ev, product._id ) }>Delete</button>
-                            </TableCell>
-                            <ModalComponent isOpen={ modal } product={ product }/>
-                      </TableRow>
-      
-                ))
+                          <TableCell align="left">
+                            <button style={{ marginRight: 10, background: '#30D5B7', padding: '1rem 1rem 1rem', borderRadius: 50 }} onClick={ (ev) => handleUpdateTask( ev, product ) }>Edit</button>
+                            <button style={{ marginRight: 10, background: '#C8266D', padding: '1rem 1rem 1rem', borderRadius: 50}} onClick={ (ev) => deleteProduct( ev, product._id ) }>Delete</button>
+                          </TableCell>
+                    </TableRow>
+    
+                  ))
               }
             </TableBody>
           </Table>

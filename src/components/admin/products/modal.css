@@ -1,0 +1,61 @@
+
+.modal__close{
+    padding: .5rem 1rem .5rem;
+    margin-bottom: 1rem;
+    background-color: rgb(248, 121, 121);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 1rem;
+}
+
+
+.modal__container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.modal__container form{
+    display: flex;
+    flex-direction: column;
+}
+
+.product__image{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal__inputs{
+    position: relative;
+    width: 100%;
+}
+
+.modal__inputs input,
+.modal__inputs label
+{
+    margin: .7rem;
+}
+
+.modal__inputs input{
+    border-radius: 1rem;
+    padding: .5rem 1rem .5rem;
+    font-weight: bold;
+}
+
+.modal__inputs label{
+    font-size: .9rem;
+    font-weight: bold;
+}
+
+.modal__button-form{
+    padding: .5rem 1rem .5rem;
+    border-radius: 1rem;
+    background-color: var(--orange);
+    margin-top: 1rem;
+}
