@@ -50,6 +50,11 @@ export const ProductsTable = ({ products }) => {
     window.location.reload(true);
   }
 
+  const formatter = new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'COP'
+  });
+
   return (
       <div className="Table">
       <center><h3 style={{ marginTop: 3, marginBottom: 10 }}>Products</h3></center>
@@ -57,7 +62,7 @@ export const ProductsTable = ({ products }) => {
           component={Paper}
           style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
         >
-          <Table style={{ overflowY: 'scroll', maxHeight: 300 }} sx={{ minWidth: 650}} aria-label="simple table">
+          <Table style={{ overflowY: 'scroll' }} sx={{ minWidth: 650}} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -83,7 +88,7 @@ export const ProductsTable = ({ products }) => {
                         </TableCell>
                           <TableCell align="left"><img width={ 20 } src={ (product.image) ? require(`../../../assets/img/${product.image}`) : null } alt="Picture"/></TableCell>
                           <TableCell align="left">{ product.Nombre }</TableCell>
-                          <TableCell align="left">{ product.Precio }</TableCell>
+                          <TableCell align="left">{ formatter.format( product.Precio ) }</TableCell>
                           <TableCell align="left">{ product.stock }</TableCell>
                           <TableCell align="left">
                           <span className="status" style={ makeStyle( product.SoldOut ) }>{ ( product.SoldOut ) ? 'Sold Out' : `Stock: ${ product.stock }` }</span>

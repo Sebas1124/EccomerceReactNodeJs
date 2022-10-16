@@ -55,6 +55,10 @@ export const ModalComponent = ({ isOpen, product, closeModal }) => {
       "SoldOut":  form.SoldOut    || product.SoldOut
     }, "PUT")
 
+    const { products } = res;
+
+    setForm( products )
+
     closeModal()
 
     if ( res ) {
