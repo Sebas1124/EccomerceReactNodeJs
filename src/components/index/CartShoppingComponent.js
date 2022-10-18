@@ -97,7 +97,7 @@ export const CartShoppingComponent = ({ activeMenu }) => {
                  disabled={ ( auth.logged ) ? false : true } 
                  className={ ( auth.logged ) ? `button home__button` : 'button button--gray button--small'} 
                  onClick={ Checkout }>
-                    Active Chekout
+                    Chekout
                 </button>
                 { (pay) ? <PaymentComponent items={ productState.carrito }/> : null }
             </div>

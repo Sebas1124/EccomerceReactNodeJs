@@ -8,8 +8,8 @@ import { PrivateRoute } from './PrivateRoute';
 import { useCartShopping } from '../hooks/useCartShopping';
 import { SocketContext } from '../context/SocketContext';
 import { PreloaderComponent } from '../components/Preloader/PreloaderComponent';
-import { PaymentComponent } from './../components/index/PaymentComponent';
 import { PaymentResult } from '../components/index/PaymentResult';
+import { MainComponent } from '../components/404/MainComponent';
 
 
 export const AppRouter = () => {
@@ -38,12 +38,11 @@ export const AppRouter = () => {
             <div className="main">
                 <Routes>
                   <Route exact path='/' element={ <MainIndexComponent isAuthenticated={ auth.logged }/> }/>
-                  <Route path='/feedback/*' exact element={ ({ match }) => {
-                    return <PaymentResult PaymentId={ match.params.payment_id }/>
-                  }}/>
+                  <Route path='/feedback/*' exact element={ <PaymentResult/> }/>
                   <Route exact path={`/profile/${ auth.uid }`} element={ <ProfilePage isAuthenticated={auth.logged}/> }/>
                   <Route exact path='/auth/*' element={ <PublicRoutes isAuthenticated={auth.logged}/> }/>
                   <Route exact path='/admin/*' element={ <PrivateRoute isAdmin={ auth.admin }/> }/>
+                  <Route path='/*' element={ <MainComponent/> }/>
                 </Routes>
             </div>
     </BrowserRouter>
