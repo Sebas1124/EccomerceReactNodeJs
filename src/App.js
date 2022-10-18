@@ -9,7 +9,6 @@ import { ProductProvider } from './context/ProductsContext';
 export const App = () => {
 
   return (
-    <StrictMode>
       <ProductProvider>
         <AuthProvider>
             <SocketProvider>
@@ -17,6 +16,5 @@ export const App = () => {
             </SocketProvider>
         </AuthProvider>
       </ProductProvider>
-    </StrictMode>
   )
 }

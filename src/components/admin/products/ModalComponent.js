@@ -74,7 +74,6 @@ export const ModalComponent = ({ isOpen, product, closeModal }) => {
         open={ isOpen }
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-
     >
         <Box sx={style} className='main__modal'>
           <button className='modal__close' onClick={ closeModal }>&#9747;</button>

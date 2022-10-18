@@ -19,6 +19,17 @@ th {
   border-radius: 9px;
 }
 
+.button__new{
+  margin-top: 1rem;
+  padding: .5rem 1rem .5rem;
+  border-radius: 1rem;
+  background-color: var(--orange);
+  transition: 1000 ease-in-out;
+}
+.button__new:hover{
+  font-weight: bold;
+}
+
 .Details {
   color: #00b5ff !important;
 }

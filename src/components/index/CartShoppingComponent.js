@@ -2,13 +2,17 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useCartShopping } from '../../hooks/useCartShopping';
 import { ProductsContext } from './../../context/ProductsContext';
 import { AuthContext } from './../../auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { History } from 'swiper';
+import { PaymentComponent } from './PaymentComponent';
 
 export const CartShoppingComponent = ({ activeMenu }) => {
 
     const [ cartShopping, setCartShopping ] = useState(false);
-    const { deleteCart, restCart, sumCart, getCartsShopping, carts } = useCartShopping();
+    const { deleteCart, restCart, sumCart, getCartsShopping} = useCartShopping();
     const { productState } = useContext( ProductsContext );
     const { auth } = useContext( AuthContext );
+    const [ pay, setPay ] = useState(false)
 
     const formatter = new Intl.NumberFormat('de-DE', {
         style: 'currency',
@@ -24,9 +28,9 @@ export const CartShoppingComponent = ({ activeMenu }) => {
 
     const total = productState.carrito.reduce(
         (acumulador, actual) => acumulador + actual.PrecioCarrito, 0);
-
+    
     const Checkout = () => {
-        console.log('Debes loguearte para pagar')
+        setPay(true)
     }
 
   return (
@@ -87,10 +91,15 @@ export const CartShoppingComponent = ({ activeMenu }) => {
                 <span className="cart__prices-total">${ formatter.format( total ) }</span>
             </div>
 
-            <div style={{ marginTop: 50, right: 60, position: 'absolute' }}>
-                <button disabled={ ( auth.logged ) ? false : true } className={ ( auth.logged ) ? `button home__button` : 'button button--gray button--small'} onClick={ Checkout }>
-                    Checkout
+            <div style={{ marginTop: 50, left: 50, position: 'absolute', display: 'flex', justifyContent: 'space-between' }}>
+                <button
+                style={{ marginRight: 50 }}
+                 disabled={ ( auth.logged ) ? false : true } 
+                 className={ ( auth.logged ) ? `button home__button` : 'button button--gray button--small'} 
+                 onClick={ Checkout }>
+                    Active Chekout
                 </button>
+                { (pay) ? <PaymentComponent items={ productState.carrito }/> : null }
             </div>
         </div>
     </>
