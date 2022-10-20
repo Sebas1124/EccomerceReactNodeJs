@@ -10,6 +10,7 @@ import { SocketContext } from '../context/SocketContext';
 import { PreloaderComponent } from '../components/Preloader/PreloaderComponent';
 import { PaymentResult } from '../components/index/PaymentResult';
 import { MainComponent } from '../components/404/MainComponent';
+import { ChatRouteSegurity } from './ChatRouteSegurity';
 
 
 export const AppRouter = () => {
@@ -39,6 +40,7 @@ export const AppRouter = () => {
                 <Routes>
                   <Route exact path='/' element={ <MainIndexComponent isAuthenticated={ auth.logged }/> }/>
                   <Route path='/feedback/*' exact element={ <PaymentResult/> }/>
+                  <Route path='/support-chat' exact element={ <ChatRouteSegurity isAuthenticated={ auth.logged }/> }/>
                   <Route exact path={`/profile/${ auth.uid }`} element={ <ProfilePage isAuthenticated={auth.logged}/> }/>
                   <Route exact path='/auth/*' element={ <PublicRoutes isAuthenticated={auth.logged}/> }/>
                   <Route exact path='/admin/*' element={ <PrivateRoute isAdmin={ auth.admin }/> }/>
