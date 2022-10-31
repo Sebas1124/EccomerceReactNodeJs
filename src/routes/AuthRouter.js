@@ -11,7 +11,6 @@ export const AuthRouter = () => {
       <Routes>
           <Route path='/login' element={ <LoginPage/> }></Route>
           <Route path='/register' element={ <RegisterPage/> }></Route>
-          <Route path="*" element={<h1>404</h1>}></Route>
       </Routes>
     <FooterComponent/>
     </>

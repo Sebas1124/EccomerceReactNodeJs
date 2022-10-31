@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../context/SocketContext";
-import { fectSinToken } from "../helpers/fetch";
 
 
 export const useUsers = () => {
@@ -13,7 +12,6 @@ export const useUsers = () => {
             setUsers( usuarios )
         });
       }, [ socket ])
-
 
     return {
         users
